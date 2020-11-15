@@ -12,4 +12,7 @@ if ! command -v python3 > /dev/null; then
     printf "${CLEAR_LINE}💀${RED}   You must install python3 on your system before setup can continue${NO_COLOR}\n"
     printf "ℹ️   On Ubuntu-Linux🍎 you should 'sudo apt install python'\n"
     exit
-fi 
+fi
+
+# create file if it doesnt exist yet
+#echo "**created by aliasrc" >> ~/.bash_aliases.back

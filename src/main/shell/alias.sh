@@ -34,4 +34,4 @@ CLEAR_LINE='\r\033[K'
 
 #actual script begins here
 
-python3 ./helpers/listFileContent.py "$alias" "$command"
+python3 ../python/scripts/listFileContent.py "$alias" "$command"
