@@ -45,3 +45,5 @@ alias -a -c --verify
         -p print file 
         -d -a "kbc" => delete alias
         -d -g "kubectl" => delete whole group
+
+termcolor~=1.1.0
