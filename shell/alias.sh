@@ -32,7 +32,7 @@ elif [ "$delete" == true ] && [ "$alias" ]; then
    echo "delete given alias: $alias"
 elif [ "$delete" == true ] && [ "$group" ]; then 
    echo "Deleting given group: $group"
-elif [ "$delete" == true ] && [ $( whoami ) == "root" ]; then 
+elif [ "$delete" == true ] && [ $( whoami ) == "root" ]; then
    functions/pruneAliasFile.sh
 elif [ "$delete" == true ] && [ ! $( whoami ) == "root" ]; then
    echo "run command as sudo user" && exit 1
