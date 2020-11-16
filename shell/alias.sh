@@ -23,7 +23,7 @@ shift $((OPTIND -1))
 export ALIAS_RC_ROOT=~/.bash_aliasrc
 #Check parameters
 if [ "$alias" ] && [ "$command" ]; then
-   echo "call insert method"
+   python ../python/switcher.py "insert" "$alias" "$command"
 elif [ "$group" ] && [ "$print" == true ]; then
    echo "print commandgroup"
 elif [ "$print" == true ]; then
@@ -37,9 +37,7 @@ elif [ "$delete" == true ] && [ $( whoami ) == "root" ]; then
 elif [ "$delete" == true ] && [ ! $( whoami ) == "root" ]; then
    echo "run command as sudo user" && exit 1
 elif [ "$editor" ]; then
-   functions/editAliases.sh $editor
+   functions/editAliases.sh "$editor"
 else 
    helpFunction
 fi
-
-#python3 ../python/scripts/listFileContent.py "$alias" "$command"
