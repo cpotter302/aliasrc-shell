@@ -2,7 +2,8 @@
     - ensure python is there on the host system 
         - otherwise ask for Installation => run with sudo 
         - check bashrc PATH
-    - create a .bash_aliases on ~ if not existent yet
+    - create a .bash_aliasrc on ~ 
+    echo into bashrc
     -create aliasrc file and embed it in ~/.bashrc
     -source ~/.bashrc after each embed action 
 
@@ -34,3 +35,13 @@ aliasrc.conf => predefined configuration
 
 alias -a -c --verify 
     => verify if command is working
+
+
+    commands: 
+        -a "" -c "" => add alias 
+        -p -g "node" print command group
+        -d  => delete aliasrc file
+        -e "nano" => edit file with given editor
+        -p print file 
+        -d -a "kbc" => delete alias
+        -d -g "kubectl" => delete whole group
