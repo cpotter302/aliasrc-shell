@@ -1,12 +1,9 @@
 [kubectl]
 alias la='ls -la'
 alias kbc='kubectl get pods' hhh
-alias happy='node get pods' 
+alias mvn='node get pods' 
+alias moin='node --version'
+alias ns='node start server' 
 alias happy='npm --version' 
-alias happy='npm --version' 
-
-
 alias juice='htop list'
-
-
 alias ksks=''
