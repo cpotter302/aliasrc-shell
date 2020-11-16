@@ -50,13 +50,13 @@ def file_check(text_content):
     return aliasList
 
 
-def main():
+def setup():
     # print(sys.argv[1])
     # print(sys.argv[2])
     print("🔎   checking alias-file")
     mainList = []
     
-    with open(".bash_aliases.back", "r") as aliasrc:
+    with open("../resources/.bash_aliases.back", "r") as aliasrc:
         mainList = file_check(aliasrc.read())
     print("ℹ️   Check completed")
     print("-----------------\nFile infos:")
@@ -66,5 +66,4 @@ def main():
     # file operations come here
     # setup file operations based on switch statements, new file for flags and writing operation
 
-
-main()
+setup()
