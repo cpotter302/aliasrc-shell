@@ -33,7 +33,7 @@ def file_check(text_content):
     for index, line in enumerate(text_content.split('\n'), start=1):
         if aliasPattern.match(line) or groupPattern.match(line):
             if aliasPattern.match(line):
-                slicedLine = slice(line.strip(), "\'", 2)
+                slicedLine = slice(line.strip(), "'", 2)
                 command = get_command(slicedLine)
                 if is_command(slicedLine):
                     if slicedLine not in aliasList:
