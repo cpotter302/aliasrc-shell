@@ -14,7 +14,7 @@ def log_argv(argv, operate):
 
 
 def execute_task(operation):
-    setup("../resources/.bash_aliases.back")
+    setup("../../resources/.bash_aliases.back")
     
     switcher = {
         "insert": log_argv(sys.argv, som_operator.insert_alias),

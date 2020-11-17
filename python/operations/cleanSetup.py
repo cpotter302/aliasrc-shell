@@ -38,6 +38,9 @@ def check_line(slicedLine, command, index):
         print(colored("dangerous alias embedding in line:{} {} --> alias '{}' already exists"
                       .format(index, slicedLine, command), 'red'))
         return False
+    elif is_command(get_alias(slicedLine)):
+        print(colored("Line {}, given alias also a valid command => Conflict:{} is ".format(index, get_alias(slicedLine)), 'red'))
+        return False
     elif not get_alias(slicedLine) not in aliasCommands:
         print(colored("Found duplicate Alias in line:{} {}".format(index, get_alias(slicedLine)), 'red'))
         return False
@@ -69,7 +72,7 @@ def file_check(text_content):
 
 def setup(path):
     print("🔎   checking alias-file")
-    file = "../resources/.bash_aliases.back"
+    file = "../../resources/.bash_aliases.back"
 
     with open(path, "r") as aliasrc:
         file_check(aliasrc.read())
