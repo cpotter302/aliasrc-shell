@@ -1,20 +1,25 @@
 import sys
-from cleanSetup import setup
+from operations.cleanSetup import setup
+import operations.som as som_operator
 
 
-def log_argv(argv):
+def log_argv(argv, operate):
     print("\nfrom switcher.py")
     for x in range(1, len(argv)):
         print(argv[x])
+    som_operator.sort()
+    operate()
+    som_operator.manipulate()
     sys.exit(0)
 
 
 def execute_task(operation):
     setup("../resources/.bash_aliases.back")
+    
     switcher = {
-        "insert": log_argv(sys.argv),
-        "deleteA": log_argv(sys.argv),
-        "deleteG": log_argv(sys.argv)
+        "insert": log_argv(sys.argv, som_operator.insert_alias),
+        "deleteA": log_argv(sys.argv, som_operator.del_alias),
+        "deleteG": log_argv(sys.argv, som_operator.del_group)
     }
     switcher.get(operation, "No operation found")
 

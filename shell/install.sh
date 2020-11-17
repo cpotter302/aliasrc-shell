@@ -33,4 +33,4 @@ fi
 
 printf "Succesfully installes aliasrc-shell"
 printf "view man pages for further instructions"
-#TODO make al *.sh files executable
+#TODO make al *.sh files executeable
