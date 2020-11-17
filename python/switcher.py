@@ -1,5 +1,5 @@
 import sys
-from python.cleanSetup import setup
+from cleanSetup import setup
 
 
 def log_argv(argv):
@@ -13,7 +13,8 @@ def execute_task(operation):
     setup("../resources/.bash_aliases.back")
     switcher = {
         "insert": log_argv(sys.argv),
-        "delete": log_argv(sys.argv)
+        "deleteA": log_argv(sys.argv),
+        "deleteG": log_argv(sys.argv)
     }
     switcher.get(operation, "No operation found")
 

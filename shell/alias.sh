@@ -1,7 +1,7 @@
 #!/bin/bash
 helpFunction()
 {
-   echo ""
+   echo "Argument unknown"
    echo "Usage: $0 view man pages for further instructions"
    exit 1
 }
@@ -23,15 +23,15 @@ shift $((OPTIND -1))
 export ALIAS_RC_ROOT=~/.bash_aliasrc
 #Check parameters
 if [ "$alias" ] && [ "$command" ]; then
-   python ../python/switcher.py "insert" "$alias" "$command"
+   python3 ../python/switcher.py "insert" "$alias" "$command"
 elif [ "$group" ] && [ "$print" == true ]; then
-   echo "print commandgroup"
+   functions/printCommandGroup.sh $group
 elif [ "$print" == true ]; then
-   echo "print bash_aliases"
+   functions/printBashAliases.sh
 elif [ "$delete" == true ] && [ "$alias" ]; then
-   echo "delete given alias: $alias"
+   python3 ../python/switcher.py "deleteA" "$alias"
 elif [ "$delete" == true ] && [ "$group" ]; then 
-   echo "Deleting given group: $group"
+   python3 ../python/switcher.py "deleteG" "$group"
 elif [ "$delete" == true ] && [ $( whoami ) == "root" ]; then
    functions/pruneAliasFile.sh
 elif [ "$delete" == true ] && [ ! $( whoami ) == "root" ]; then
