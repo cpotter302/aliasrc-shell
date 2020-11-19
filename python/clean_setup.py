@@ -1,3 +1,4 @@
+import sys
 import re as pattern
 from termcolor import colored
 
@@ -70,9 +71,11 @@ def file_check(text_content):
             print(colored("Removing line {}: {}  due to wrong pattern".format(index, line), 'red'))
 
 
+def light_setup(path): 
+    print("Hello from light")
+
 def setup(path):
     print("🔎   checking alias-file")
-    file = "../../resources/.bash_aliases.back"
 
     with open(path, "r") as aliasrc:
         file_check(aliasrc.read())
@@ -82,3 +85,21 @@ def setup(path):
     print("Command Groups: {}".format(groupNames))
     print("Aliases: {}".format(aliasList))
     print("Aliases Groups: {}".format(aliasCommands))
+
+
+def insert(path):
+    print("Hello frm insert", path)
+
+
+
+
+def switcher(args): 
+    if args[2] == "setup":
+        setup(args[1])
+    elif args[2] == "insert":
+        insert(args[1])
+    else:
+        light_setup(args[1])
+
+
+switcher(sys.argv if len(sys.argv) > 1 else sys.exit(-666))

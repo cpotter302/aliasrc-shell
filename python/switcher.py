@@ -1,6 +1,6 @@
 import sys
-from operations.cleanSetup import setup
-import operations.som as som_operator
+from python.clean_setup import setup
+import python.operations.som as som_operator
 
 
 def log_argv(argv, operate):
@@ -14,7 +14,7 @@ def log_argv(argv, operate):
 
 
 def execute_task(operation):
-    setup("../../resources/.bash_aliases.back")
+    setup()
     
     switcher = {
         "insert": log_argv(sys.argv, som_operator.insert_alias),
