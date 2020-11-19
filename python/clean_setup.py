@@ -72,9 +72,15 @@ def file_check(text_content):
 
 
 def light_setup(path): 
-    print("Hello from light")
+    light_al = []
+    with open(path, "r+") as aliasrc:
+        for index, line in enumerate(aliasrc.read().split("\n"), start=1):
+            if line.startswith("alias"): 
+                light_al.append(line)
+            print(index, line)
 
-def setup(path):
+
+def verify(path):
     print("🔎   checking alias-file")
 
     with open(path, "r") as aliasrc:
@@ -87,17 +93,9 @@ def setup(path):
     print("Aliases Groups: {}".format(aliasCommands))
 
 
-def insert(path):
-    print("Hello frm insert", path)
-
-
-
-
 def switcher(args): 
-    if args[2] == "setup":
-        setup(args[1])
-    elif args[2] == "insert":
-        insert(args[1])
+    if args[2] == "verify":
+        verify(args[1])
     else:
         light_setup(args[1])
 

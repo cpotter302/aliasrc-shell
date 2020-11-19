@@ -41,7 +41,7 @@ elif [ "$delete" == true ] && [ "$group" ]; then
 elif [ "$delete" == true ] && [ $( whoami ) == "root" ]; then
    functions/pruneAliasFile.sh
 
-elif [ "$delete" == true ] && [ ! $( whoami ) == "root" ]; then
+elif [ "$delete" ] && [ ! $( whoami ) == "root" ]; then
    echo "run command as sudo user" && exit 1
 
 elif [ "$editor" ]; then
@@ -51,13 +51,30 @@ else
    helpFunction
 fi
 
-# sort file in every cases
 
-cat $ALIAS_RC_ROOT | sort > tmp && mv tmp $ALIAS_RC_ROOT
+function light_setup {
+   #python3 ../python/clean_setup.py "$ALIAS_RC_ROOT" "light-setup"
+   exit 1
+}
 
-python3 ../python/clean_setup.py "$ALIAS_RC_ROOT" "light-setup"
+# sort file in every cases, type determined by config file
 
-#clean file from potential wrong patterns
+CONF_FILE=aliasrc.conf
+SORT_TYPE=$((grep SORT_TYPE | cut -d'=' -f 2)<"$CONF_FILE")
+
+if [ -f $CONF_FILE ]; then
+   if [[ "$SORT_TYPE" == "alph" ]]; then 
+      cat "$ALIAS_RC_ROOT" | sort > tmp && mv tmp $ALIAS_RC_ROOT
+   elif [[ "$SORT_TYPE" == "group-based" ]]; then
+      light_setup
+   else
+      echo "env SORT_TYPE not unknown or not specified in config file => using default group-based sort"
+      light_setup
+   fi
+else 
+   echo "no config file, using default configuration"
+fi
+
 
 #python3 ../python/clean_setup.py "$ALIAS_RC_ROOT" "setup"
 

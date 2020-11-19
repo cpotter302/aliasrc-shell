@@ -1,5 +1,5 @@
 import sys
-from python.clean_setup import setup
+from python.clean_setup import verify
 import python.operations.som as som_operator
 
 
@@ -14,7 +14,7 @@ def log_argv(argv, operate):
 
 
 def execute_task(operation):
-    setup()
+    verify()
     
     switcher = {
         "insert": log_argv(sys.argv, som_operator.insert_alias),
