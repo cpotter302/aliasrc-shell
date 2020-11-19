@@ -57,7 +57,7 @@ function light_setup {
    exit 1
 }
 
-# sort file in every cases, type determined by config file
+#sort file in every cases, type determined by config file
 
 CONF_FILE=aliasrc.conf
 SORT_TYPE=$((grep SORT_TYPE | cut -d'=' -f 2)<"$CONF_FILE")
