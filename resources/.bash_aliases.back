@@ -1,6 +1,6 @@
 [kubectl]
 alias la='ls -la'
-alias kbc='kubectl get pods' hhh
+alias kbc='kubectl get pods'
 alias mvn='node get pods' 
 alias moin='node --version'
 alias ns='node start server' 

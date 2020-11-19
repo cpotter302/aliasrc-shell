@@ -70,15 +70,9 @@ def file_check(text_content):
         elif line.strip():
             print(colored("Removing line {}: {}  due to wrong pattern".format(index, line), 'red'))
 
-
-def light_setup(path): 
-    light_al = []
-    with open(path, "r+") as aliasrc:
-        for index, line in enumerate(aliasrc.read().split("\n"), start=1):
-            if line.startswith("alias"): 
-                light_al.append(line)
-            print(index, line)
-
+def sort_alphabetically(arr):
+   return sorted(arr, key=str.lower)
+    
 
 def verify(path):
     print("🔎   checking alias-file")
@@ -92,6 +86,26 @@ def verify(path):
     print("Aliases: {}".format(aliasList))
     print("Aliases Groups: {}".format(aliasCommands))
 
+def structured_writer(f, al, com):
+    TGREEN =  '\033[32m' # Green Text
+    TWHITE = '\033[37m'
+    for command in com: 
+        f.write("\n[" + TGREEN + " -- " + command + " -- "+ TWHITE + "]",)
+        for alias in al:
+            if get_command(alias) == command:
+                f.write("\n" + alias + "\n")
+
+def light_setup(path): 
+    light_al = []
+    light_com = []
+    with open(path, "r+") as aliasrc:
+        for index, line in enumerate(aliasrc.read().split("\n"), start=0):
+            if line.startswith("alias") and get_command(line) != "'" :
+                light_al.append(line)
+                light_com.append(get_command(line) if isinstance(get_command(line), str) and get_command(line) not in light_com else "")
+        light_com = sort_alphabetically(filter(None, light_com))
+        aliasrc.truncate(0)
+        structured_writer(aliasrc, light_al, light_com)
 
 def switcher(args): 
     if args[2] == "verify":
