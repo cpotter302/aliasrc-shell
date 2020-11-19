@@ -1,3 +1,10 @@
+TODOS: 
+    log file mit letztem Start und Systeminfos und Infos über alle Aliase => Backup 
+    neue Flag um Sortierung zu setzen
+    -s => sort_type
+    shells neu struktiruern
+    sort with whitespace
+
 ***Installation***
     - ensure python is there on the host system
         - otherwise ask for Installation => run with sudo

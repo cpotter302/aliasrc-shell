@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ -f /home/carlo/.bash_aliasrc ]; then
+if [ -f $ALIAS_RC_ROOT ]; then
     echo "Are you sure to delete the file? Type yes"
     read prompt
     if [[ $prompt =~ [yes|y] ]]; then
