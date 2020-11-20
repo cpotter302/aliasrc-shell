@@ -87,7 +87,7 @@ def verify(path):
     if errorCounter == 0:
         print("    No errors detected 	\u2705")
     else:
-        print("\n    Found {} errors".format(errorCounter))
+        print("\n    Found {} error(s)".format(errorCounter))
 
     print("\n    Check completed\n")
     print("----------------------\n")
