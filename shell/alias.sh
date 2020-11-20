@@ -16,7 +16,7 @@ do
       d ) delete=true ;; # delete file content
       e ) editor=$OPTARG ;;# edit .bash_aliasrc with given editor
       v ) verify=true ;;
-      ? ) helpFunction $OPTARG;;
+      ? ) helpFunction "$OPTARG";;
    esac
 done
 shift $((OPTIND -1))
@@ -62,7 +62,7 @@ fi
 #sort file in every cases, type determined by config file
 
 CONF_FILE=aliasrc.conf
-SORT_TYPE=$((grep SORT_TYPE | cut -d'=' -f 2)<"$CONF_FILE")
+SORT_TYPE=$(( grep SORT_TYPE | cut -d'=' -f 2 )<"$CONF_FILE")
 
 if [ -f $CONF_FILE ]; then
    if [[ "$SORT_TYPE" == "alph" ]]; then
@@ -78,4 +78,5 @@ else
    echo "no config file, using default configuration"
 fi
 
-source ~/.bashrc
+
+source "$HOME"/.bashrc
