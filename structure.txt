@@ -4,6 +4,8 @@ TODOS:
     -s => sort_type
     shells neu struktiruern
     sort with whitespace
+    extra file for bash functions 
+    shorten the shell scripts in the functions directory
 
 ***Installation***
     - ensure python is there on the host system
