@@ -1,0 +1,56 @@
+TODOS: 
+    log file mit letztem Start und Systeminfos und Infos über alle Aliase => Backup 
+    neue Flag um Sortierung zu setzen
+    -s => sort_type
+    shells neu struktiruern
+    sort with whitespace
+    extra file for bash functions 
+    shorten the shell scripts in the functions directory
+
+***Installation***
+    - ensure python is there on the host system
+        - otherwise ask for Installation => run with sudo
+        - check bashrc PATH
+    - create a .bash_aliasrc on ~
+    echo into bashrc
+    -create aliasrc file and embed it in ~/.bashrc
+    -source ~/.bashrc after each embed action
+
+
+***Aufbau***
+aliasrc -a "ALIAS_NAME" -c "<ACTUAL_COMMAND>"
+
+
+aliasrc ls => list all aliases => create groups from python script
+    - highlight aliases and group titles
+
+aliasrc -d "ALIAS_NAME>"
+    - konnte angegeben alias nicht finden
+    - echo nachricht
+
+aliasrc -a "ALIAS_NAME" -c "USED_ALIAS" =>
+    alias embedding not allowed => using existing alias for new alias
+    please create a new one
+
+aliasrc kubectl --assoc
+    => show aliases associate with kubectl
+
+aliasrc --purge
+    => list delete all aliases
+
+aliasrc.conf => predefined configuration
+    => custom aliases file
+    => predefined aliases
+
+alias -a -c --verify
+    => verify if command is working
+
+
+    commands:
+        -a "" -c "" => add alias
+        -p -g "node" print command group
+        -d  => delete aliasrc file
+        -e "nano" => edit file with given editor
+        -p print file
+        -d -a "kbc" => delete alias
+        -d -g "kubectl" => delete whole group
