@@ -7,6 +7,7 @@ groupNames = []
 aliasList = []
 aliasCommands = []
 genLine = "#"
+wildCardList = ["source"]
 
 def get_command(string):
     return string.replace(slice(string, "'", 1), "").split(" ")[0]
@@ -66,7 +67,7 @@ def file_check(text_content):
             if aliasPattern.match(line):
                 slicedLine = slice(line.strip(), "'", 2)
                 command = get_command(slicedLine)
-                if is_command(command):
+                if is_command(command) or command in wildCardList:
                     errorCounter += 0 if check_line(slicedLine, command, index) else 1
                 else:
                     print(colored("command '{}' not found on local-system".format(command), 'red'))
@@ -77,13 +78,19 @@ def file_check(text_content):
 
     return errorCounter
 
+
+def sort_alphabetically(arr):
+   return sorted(arr, key=str.lower)
     
 
-def verify(path):
+def verify(path, groupNames):
     print("\n🔎  checking alias-file: {}\n".format(path))
 
     with open(path, "r") as aliasrc:
         errorCounter = file_check(aliasrc.read())
+
+    setup(path, True, groupNames)
+
     if errorCounter == 0:
         print("    No errors detected 	\u2705")
     else:
@@ -99,10 +106,6 @@ def verify(path):
     print(colored("Aliases:", 'green'), *aliasCommands, sep="|")
 
 
-def sort_alphabetically(arr):
-   return sorted(arr, key=str.lower)
-
-
 def structured_writer(f, al, com):
     TGREEN =  '\033[32m' # Green Text
     TWHITE = '\033[37m'
@@ -112,23 +115,26 @@ def structured_writer(f, al, com):
             if get_command(alias) == command:
                 f.write("\n" + alias + "\n")
 
-def setup(path): 
-    light_al = []
-    light_com = []
+
+def setup(path, isVerified, groupNames):
     with open(path, "r+") as aliasrc:
-        for index, line in enumerate(aliasrc.read().split("\n"), start=0):
-            if line.startswith("alias") or line.startswith(genLine) and get_command(line) != "'" :
-                light_al.append(line)
-                light_com.append(get_command(line) if isinstance(get_command(line), str) and get_command(line) not in light_com else "")
-        light_com = sort_alphabetically(filter(None, light_com))
+        if not isVerified:
+            for index, line in enumerate(aliasrc.read().split("\n"), start=0):
+                if line.startswith("alias") or line.startswith(genLine) and get_command(line) != "'" :
+                    aliasList.append(line)
+                    groupNames.append(get_command(line) if isinstance(get_command(line), str) and get_command(line) not in groupNames else "")
+        groupNames = sort_alphabetically(filter(None, groupNames))
         aliasrc.truncate(0)
-        structured_writer(aliasrc, light_al, light_com)
+        structured_writer(aliasrc, aliasList, groupNames)
+
 
 def switcher(args): 
     if args[2] == "verify":
-        verify(args[1])
-    else:
-        setup(args[1])
+        verify(args[1], groupNames)
+    elif args[2] == "light-setup":
+        setup(args[1], False, groupNames)
+    else: 
+        print("unknown flag: " + args[2])
 
 
 switcher(sys.argv if len(sys.argv) > 1 else sys.exit(-666))
