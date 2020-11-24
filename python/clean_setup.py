@@ -9,15 +9,16 @@ aliasCommands = []
 genLine = "#"
 wildCardList = ["source"]
 
+
 def get_command(string):
-    return string.replace(slice(string, "'", 1), "").split(" ")[0]
+    return string.replace(slice_line(string, "'", 1), "").split(" ")[0]
 
 
 def get_alias(string):
-    return slice(string, "=", 1).replace("alias", "").replace("=", "").strip()
+    return slice_line(string, "=", 1).replace("alias", "").replace("=", "").strip()
 
 
-def slice(text, char, occur):
+def slice_line(text, char, occur):
     string = ""
     counter = 0
     for c in range(len(text)):
@@ -42,7 +43,8 @@ def check_line(slicedLine, command, index):
                       .format(index, slicedLine, command), 'red'))
         return False
     elif is_command(get_alias(slicedLine)):
-        print(colored("Line {}, given alias also a valid command => Conflict: {}".format(index, get_alias(slicedLine)), 'red'))
+        print(colored("Line {}, given alias also a valid command => Conflict: {}"
+                      .format(index, get_alias(slicedLine)), 'red'))
         return False
     elif not get_alias(slicedLine) not in aliasCommands:
         print(colored("Found duplicate Alias in line:{} {}".format(index, get_alias(slicedLine)), 'red'))
@@ -65,7 +67,7 @@ def file_check(text_content):
     for index, line in enumerate(splittedText, start=1):
         if aliasPattern.match(line) or groupPattern.match(line) or line.startswith(genLine):
             if aliasPattern.match(line):
-                slicedLine = slice(line.strip(), "'", 2)
+                slicedLine = slice_line(line.strip(), "'", 2)
                 command = get_command(slicedLine)
                 if is_command(command) or command in wildCardList:
                     errorCounter += 0 if check_line(slicedLine, command, index) else 1
@@ -80,8 +82,8 @@ def file_check(text_content):
 
 
 def sort_alphabetically(arr):
-   return sorted(arr, key=str.lower)
-    
+    return sorted(arr, key=str.lower)
+
 
 def verify(path, groupNames):
     print("\n🔎  checking alias-file: {}\n".format(path))
@@ -107,10 +109,10 @@ def verify(path, groupNames):
 
 
 def structured_writer(f, al, com):
-    TGREEN =  '\033[32m' # Green Text
+    TGREEN = '\033[32m'  # Green Text
     TWHITE = '\033[37m'
-    for command in com: 
-        f.write("\n[" + TGREEN + " -- " + command + " -- "+ TWHITE + "]",)
+    for command in com:
+        f.write("\n[" + TGREEN + " -- " + command + " -- " + TWHITE + "]", )
         for alias in al:
             if get_command(alias) == command:
                 f.write("\n" + alias + "\n")
@@ -120,20 +122,21 @@ def setup(path, isVerified, groupNames):
     with open(path, "r+") as aliasrc:
         if not isVerified:
             for index, line in enumerate(aliasrc.read().split("\n"), start=0):
-                if line.startswith("alias") or line.startswith(genLine) and get_command(line) != "'" :
+                if line.startswith("alias") or line.startswith(genLine) and get_command(line) != "'":
                     aliasList.append(line)
-                    groupNames.append(get_command(line) if isinstance(get_command(line), str) and get_command(line) not in groupNames else "")
+                    groupNames.append(get_command(line) if isinstance(get_command(line), str) and get_command(
+                        line) not in groupNames else "")
         groupNames = sort_alphabetically(filter(None, groupNames))
         aliasrc.truncate(0)
         structured_writer(aliasrc, aliasList, groupNames)
 
 
-def switcher(args): 
+def switcher(args):
     if args[2] == "verify":
         verify(args[1], groupNames)
     elif args[2] == "light-setup":
         setup(args[1], False, groupNames)
-    else: 
+    else:
         print("unknown flag: " + args[2])
 
 
