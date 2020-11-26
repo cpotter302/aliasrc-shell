@@ -112,7 +112,7 @@ def structured_writer(f, al, com):
     TGREEN = '\033[32m'  # Green Text
     TWHITE = '\033[37m'
     for command in com:
-        f.write("\n[" + TGREEN + " -- " + command + " -- " + TWHITE + "]", )
+        f.write("\n" + genLine + "[" + TGREEN + " -- " + command + " -- " + TWHITE + "]", )
         for alias in al:
             if get_command(alias) == command:
                 f.write("\n" + alias + "\n")
