@@ -7,7 +7,8 @@ groupNames = []
 aliasList = []
 aliasCommands = []
 genLine = "#"
-wildCardList = ["source"]
+wildCardList = ["source, sudo"]
+
 
 
 def get_command(string):
