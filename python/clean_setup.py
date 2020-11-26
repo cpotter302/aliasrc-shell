@@ -10,6 +10,7 @@ genLine = "#"
 wildCardList = ["source, sudo"]
 
 
+
 def get_command(string):
     return string.replace(slice_line(string, "'", 1), "").split(" ")[0]
 

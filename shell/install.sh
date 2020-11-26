@@ -6,7 +6,6 @@ sudo -n true
 
 test $? -eq 0 || echo "you should have sudo privileges to run this script" && exit 1
 
-
 RED='\033[0;31m'
 NO_COLOR='\033[0m'
 CLEAR_LINE='\r\033[K'
@@ -27,6 +26,7 @@ if ! command -v python3 >/dev/null  ||  ! command -v pip3 >/dev/null; then
   "${CLEAR_LINE}", "${RED}", "${NO_COLOR}"
 
   echo "To install automatically by the script enter 'yes'"
+  
   read -r prompt
     if [[ $prompt =~ [yes|y] ]]; then
         sudo apt-get update
@@ -49,6 +49,5 @@ sudo chmod +x /bin/alirc
 
 printf "Succesfully installed aliasrc-shell"; echo "removing install script" && rm "$PWD"/install.sh
 printf "view man pages for further instructions"
-
 
 #TODO: Move bash file to /usr/bin and sources to
