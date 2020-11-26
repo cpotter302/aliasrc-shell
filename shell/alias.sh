@@ -5,7 +5,7 @@ helpFunction() {
   exit 1
 }
 
-while getopts ":a:c:g:pde:v" opt; do
+while getopts ":a:c:g:pde:vo" opt; do
   case "$opt" in
   a) alias="$OPTARG" ;; #alias
   c) command="$OPTARG" ;; # command
@@ -14,6 +14,7 @@ while getopts ":a:c:g:pde:v" opt; do
   d) delete=true ;; # delete file content
   e) editor=$OPTARG ;; # edit .bash_aliasrc with given editor
   v) verify=true ;;
+  o) overwrite=true ;;
   ?) helpFunction "$OPTARG" ;;
   esac
 done
@@ -27,7 +28,7 @@ function light_setup() {
 
 #Check parameters
 if [ "$alias" ] && [ "$command" ]; then
-  functions/insertAlias.sh "$alias" "$command"
+  functions/insertAlias.sh "$alias" "$command" "$overwrite"
 
 elif [ "$verify" == true ]; then
   light_setup "verify"
