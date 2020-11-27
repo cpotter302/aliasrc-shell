@@ -74,4 +74,5 @@ else
   echo "no config file, using default configuration"
 fi
 
-source "$HOME"/.bashrc
+#source "$HOME"/.bashrc
+#eval "$(tail -n +10 < ~/.bashrc)"
