@@ -48,10 +48,6 @@ sudo chmod +x /bin/alirc
 
 printf "Succesfully installed aliasrc-shell"; echo "removing install script" && rm "$PWD"/install.sh
 printf "view man pages for further instructions"
-<<<<<<< HEAD
 printf "run source ~/.bashrc do activate changes"
-=======
-echo "run source ~/.bashrc to activate the changes"
->>>>>>> c0274fcbda3db9c3e8ff97f34fb445e4cba9ace1
 
 #TODO: Move bash file to /usr/bin and sources to
