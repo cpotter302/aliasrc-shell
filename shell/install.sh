@@ -66,4 +66,4 @@ cat << EOF
 -- RUN source ~/.bashrc to activate changes --
 EOF
 
-#TODO: remove sources / envs script
+#TODO: remove sources / envs script / create symlink to from /usr/bin/ to /bin
