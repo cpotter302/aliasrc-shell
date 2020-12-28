@@ -1,6 +1,5 @@
 import re as pattern
 import sys
-
 from termcolor import colored
 
 groupNames = []
@@ -29,56 +28,56 @@ def slice_line(text, char, occur):
     return string.strip()
 
 
-def is_command(commandToCheck):
+def is_command(command_to_check):
     from shutil import which
-    return which(commandToCheck) is not None
+    return which(command_to_check) is not None
 
 
-def check_line(slicedLine, command, index):
-    if not slicedLine not in aliasList:
-        print(colored("found duplicate versions of alias: {}".format(slicedLine), 'red'))
+def check_line(sliced_line, command, index):
+    if not sliced_line not in aliasList:
+        print(colored("found duplicate versions of alias: {}".format(sliced_line), 'red'))
         return False
     elif not command not in aliasCommands:
         print(colored("dangerous alias embedding in line:{} {} --> alias '{}' already exists"
-                      .format(index, slicedLine, command), 'red'))
+                      .format(index, sliced_line, command), 'red'))
         return False
-    elif is_command(get_alias(slicedLine)):
+    elif is_command(get_alias(sliced_line)):
         print(colored("Line {}, given alias also a valid command => Conflict: {}"
-                      .format(index, get_alias(slicedLine)), 'red'))
+                      .format(index, get_alias(sliced_line)), 'red'))
         return False
-    elif not get_alias(slicedLine) not in aliasCommands:
-        print(colored("Found duplicate Alias in line:{} {}".format(index, get_alias(slicedLine)), 'red'))
+    elif not get_alias(sliced_line) not in aliasCommands:
+        print(colored("Found duplicate Alias in line:{} {}".format(index, get_alias(sliced_line)), 'red'))
         return False
     else:
         if command not in groupNames:
             groupNames.append(command)
-        aliasCommands.append(get_alias(slicedLine))
-        aliasList.append(slicedLine)
+        aliasCommands.append(get_alias(sliced_line))
+        aliasList.append(sliced_line)
         return True
 
 
 def file_check(text_content):
-    errorCounter = int(0)
-    groupPattern = pattern.compile("\[(.*?)\]")
-    aliasPattern = pattern.compile("alias (.*?)\S='\S(.*?)'")
+    error_counter = int(0)
+    group_pattern = pattern.compile("\[(.*?)\]")
+    alias_pattern = pattern.compile("alias (.*?)\S='\S(.*?)'")
 
-    splittedText = text_content.split('\n')
+    splitted_text = text_content.split('\n')
 
-    for index, line in enumerate(splittedText, start=1):
-        if aliasPattern.match(line) or groupPattern.match(line) or line.startswith(genLine):
-            if aliasPattern.match(line):
-                slicedLine = slice_line(line.strip(), "'", 2)
-                command = get_command(slicedLine)
+    for index, line in enumerate(splitted_text, start=1):
+        if alias_pattern.match(line) or group_pattern.match(line) or line.startswith(genLine):
+            if alias_pattern.match(line):
+                sliced_line = slice_line(line.strip(), "'", 2)
+                command = get_command(sliced_line)
                 if is_command(command) or command in wildCardList:
-                    errorCounter += 0 if check_line(slicedLine, command, index) else 1
+                    error_counter += 0 if check_line(sliced_line, command, index) else 1
                 else:
                     print(colored("command '{}' not found on local-system".format(command), 'red'))
-                    errorCounter += 1
+                    error_counter += 1
         elif line.strip():
             print(colored("Removing line {}: {}  due to wrong pattern".format(index, line), 'red'))
-            errorCounter += 1
+            error_counter += 1
 
-    return errorCounter
+    return error_counter
 
 
 def sort_alphabetically(arr):
@@ -89,14 +88,14 @@ def verify(path, gn):
     print("\n🔎  checking alias-file: {}\n".format(path))
 
     with open(path, "r") as aliasrc:
-        errorCounter = file_check(aliasrc.read())
+        error_counter = file_check(aliasrc.read())
 
     setup(path, True, gn)
 
-    if errorCounter == 0:
+    if error_counter == 0:
         print("    No errors detected 	\u2705")
     else:
-        print("\n    Found {} error(s)".format(errorCounter))
+        print("\n    Found {} error(s)".format(error_counter))
 
     print("\n    Check completed\n")
     print("----------------------\n")
@@ -109,18 +108,18 @@ def verify(path, gn):
 
 
 def structured_writer(f, al, com):
-    TGREEN = '\033[32m'  # Green Text
-    TWHITE = '\033[37m'
+    tgreen = '\033[32m'  # Green Text
+    twhite = '\033[37m'
     for command in com:
-        f.write("\n" + genLine + "[" + TGREEN + " -- " + command + " -- " + TWHITE + "]", )
+        f.write("\n" + genLine + "[" + tgreen + " -- " + command + " -- " + twhite + "]", )
         for alias in al:
             if get_command(alias) == command:
                 f.write("\n" + alias + "\n")
 
 
-def setup(path, isVerified, gn):
+def setup(path, is_verified, gn):
     with open(path, "r+") as aliasrc:
-        if not isVerified:
+        if not is_verified:
             for index, line in enumerate(aliasrc.read().split("\n"), start=0):
                 if line.startswith("alias") or line.startswith(genLine) and get_command(line) != "'":
                     aliasList.append(line)

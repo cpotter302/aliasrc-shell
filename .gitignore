@@ -2,3 +2,4 @@ python/__*__
 python/operations/__*__
 .idea
 .vscode
+venv
