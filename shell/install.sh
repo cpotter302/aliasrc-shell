@@ -57,8 +57,7 @@ sudo -s -- << EOF
   echo "All done."
 EOF
 
-rm -rfv aliasrc-shell &&
-
+rm -rfaliasrc-shell &&
 cat << EOF
 -> Succesfully installed aliasrc-shell
 -> removed cloned sources...
