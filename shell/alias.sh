@@ -5,7 +5,7 @@ helpFunction() {
   exit 1
 }
 
-bash_sources=/usr/lib/alirc/shell/bash_sources
+bash_sources=/usr/lib/alirc/shell/functions
 python_sources=/usr/lib/alirc/python
 
 while getopts ":a:c:g:pde:vo" opt; do
