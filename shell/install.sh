@@ -57,11 +57,11 @@ sudo -s -- << EOF
   echo "All done."
 EOF
 
+rm -rfv aliasrc-shell &&
 
 cat << EOF
 -> Succesfully installed aliasrc-shell
--> removing cloned sources...
-rm -rf aliasrc-shell
+-> removed cloned sources...
 -> view man pages for further instructions
 -- RUN source ~/.bashrc to activate changes --
 EOF
