@@ -10,8 +10,6 @@ test $? -eq 0
 git clone git@github.com:cpotter302/aliasrc-shell.git ) ||
 git clone https://github.com/cpotter302/aliasrc-shell.git
 
-#rm -rf aliasrc-shell
-
 alias_path=~/.bash_aliases
 bashrc_path="$HOME"/.bashrc
 
@@ -65,4 +63,4 @@ cat << EOF
 -- RUN source ~/.bashrc to activate changes --
 EOF
 
-#TODO: remove sources / envs script / create symlink to from /usr/bin/ to /bin
+#TODO: remove sources / envs script / create symlink to from /usr/bin/ to /bin | remove redundancy from multiple execution
