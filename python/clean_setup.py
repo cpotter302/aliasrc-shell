@@ -1,6 +1,6 @@
-from os import sep
-import sys
 import re as pattern
+import sys
+
 from termcolor import colored
 
 groupNames = []
@@ -8,7 +8,6 @@ aliasList = []
 aliasCommands = []
 genLine = "#"
 wildCardList = ["source, sudo"]
-
 
 
 def get_command(string):
@@ -86,13 +85,13 @@ def sort_alphabetically(arr):
     return sorted(arr, key=str.lower)
 
 
-def verify(path, groupNames):
+def verify(path, gn):
     print("\n🔎  checking alias-file: {}\n".format(path))
 
     with open(path, "r") as aliasrc:
         errorCounter = file_check(aliasrc.read())
 
-    setup(path, True, groupNames)
+    setup(path, True, gn)
 
     if errorCounter == 0:
         print("    No errors detected 	\u2705")
@@ -104,7 +103,7 @@ def verify(path, groupNames):
 
     print("ℹ️   Gathering information...\n")
 
-    print(colored("Command Groups: ", 'green'), *groupNames, sep='|')
+    print(colored("Command Groups: ", 'green'), *gn, sep='|')
     print(colored("Total Aliases:", 'green'), len(aliasList))
     print(colored("Aliases:", 'green'), *aliasCommands, sep="|")
 
@@ -119,17 +118,17 @@ def structured_writer(f, al, com):
                 f.write("\n" + alias + "\n")
 
 
-def setup(path, isVerified, groupNames):
+def setup(path, isVerified, gn):
     with open(path, "r+") as aliasrc:
         if not isVerified:
             for index, line in enumerate(aliasrc.read().split("\n"), start=0):
                 if line.startswith("alias") or line.startswith(genLine) and get_command(line) != "'":
                     aliasList.append(line)
-                    groupNames.append(get_command(line) if isinstance(get_command(line), str) and get_command(
-                        line) not in groupNames else "")
-        groupNames = sort_alphabetically(filter(None, groupNames))
+                    gn.append(get_command(line) if isinstance(get_command(line), str) and get_command(
+                        line) not in gn else "")
+        gn = sort_alphabetically(filter(None, gn))
         aliasrc.truncate(0)
-        structured_writer(aliasrc, aliasList, groupNames)
+        structured_writer(aliasrc, aliasList, gn)
 
 
 def switcher(args):
