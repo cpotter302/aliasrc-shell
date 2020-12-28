@@ -58,16 +58,16 @@ fi
 #sort file in every cases, type determined by config file
 
 CONF_FILE=aliasrc.conf
-SORT_TYPE=$( (grep SORT_TYPE | cut -d'=' -f 2) <"$CONF_FILE")
+SORT_TYPE=$( (grep SORT_TYPE | cut -d'=' -f 2) <"/usr/lib/alirc/shell/$CONF_FILE")
 
-if [ -f $CONF_FILE ]; then
+if [ -f "/usr/lib/alirc/shell/$CONF_FILE" ]; then
   if [[ "$SORT_TYPE" == "alph" ]]; then
     sed -i "/\[*\]/d" "$ALIAS_RC_ROOT"
     ( cat <"$ALIAS_RC_ROOT" | sort ) >tmp && mv tmp "$ALIAS_RC_ROOT"
   elif [[ "$SORT_TYPE" == "group-based" ]]; then
     light_setup "light-setup"
   else
-    echo "env SORT_TYPE not unknown or not specified in config file => using default group-based sort"
+    echo "env SORT_TYPE unknown or not specified in config file => using default group-based sort"
     light_setup "light-setup"
   fi
 else
