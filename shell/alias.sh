@@ -60,7 +60,7 @@ fi
 CONF_FILE=aliasrc.conf
 SORT_TYPE=$( (grep SORT_TYPE | cut -d'=' -f 2) <"$CONF_FILE")
 
-if [ -f $CONF_FILE ]; then
+if [ -f "/usr/lib/alirc/shell/$CONF_FILE" ]; then
   if [[ "$SORT_TYPE" == "alph" ]]; then
     sed -i "/\[*\]/d" "$ALIAS_RC_ROOT"
     ( cat <"$ALIAS_RC_ROOT" | sort ) >tmp && mv tmp "$ALIAS_RC_ROOT"
