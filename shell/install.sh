@@ -51,8 +51,8 @@ echo "Copying source files"
 sudo -s -- << EOF
   sed -i -e 's/\r$//' aliasrc-shell/shell/functions/*.sh &&
   mkdir -p /usr/lib/alirc &&
-  mv -v "$PWD"/aliasrc-shell/shell/alias.sh /bin/alirc &&
-  mv -v "$PWD"/aliasrc-shell/* /usr/lib/alirc
+  mv "$PWD"/aliasrc-shell/shell/alias.sh /bin/alirc &&
+  mv "$PWD"/aliasrc-shell/* /usr/lib/alirc
   chmod +x /bin/alirc
   echo "All done."
 EOF
