@@ -47,12 +47,12 @@ fi
 
 [ -d /usr/lib/alirc ] && echo "Sources already found on target location /usr/lib/alirc" && exit 1
 
-echo "Creating source files"
+echo "Copying source files"
 sudo -s -- << EOF
   sed -i -e 's/\r$//' aliasrc-shell/shell/functions/*.sh &&
   mkdir -p /usr/lib/alirc &&
-  mv "$PWD"/aliasrc-shell/shell/alias.sh /bin/alirc &&
-  mv "$PWD"/aliasrc-shell/* /usr/lib/alirc
+  mv -v "$PWD"/aliasrc-shell/shell/alias.sh /bin/alirc &&
+  mv -v "$PWD"/aliasrc-shell/* /usr/lib/alirc
   chmod +x /bin/alirc
   echo "All done."
 EOF
@@ -60,9 +60,10 @@ EOF
 
 cat << EOF
 -> Succesfully installed aliasrc-shell
--> removing install script...
+-> removing cloned sources...
+rm -rf aliasrc-shell
 -> view man pages for further instructions
 -- RUN source ~/.bashrc to activate changes --
 EOF
 
-#TODO: Move bash file to /usr/bin and sources to
+#TODO: remove sources / envs script
