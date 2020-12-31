@@ -6,7 +6,7 @@ if [ -f "$ALIAS_RC_ROOT" ]; then
     echo "alias $1='$2'" >>"$ALIAS_RC_ROOT"
     echo "first"
     exit 1
-  elif [ -n "$1" ] && [ "$(echo "$1" | cut -d'=' -f 1 | awk '{print $2}')" != "$2" ]; then
+  elif [ -n "$1" ] && [ "$(functions/printBashAliases.sh | grep "$1"| cut -d'=' -f 1 | awk '{print $2}')" != "$1" ]; then
     echo "alias $1='$2'" >>"$ALIAS_RC_ROOT"
     echo "fs"
     exit 1
