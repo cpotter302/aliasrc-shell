@@ -73,7 +73,7 @@ def file_check(text_content):
                 elif not is_command(command):
                     error_counter += 0 if check_line(sliced_line, command, index) else 1
                     print(colored("command '{}' not found on local-system".format(command), 'red'))
-                    print("Line: {}\t{}\n", index + 1, line[index])
+                    print("Line: {}\t{}\n".format(index + 1, str(line[index])))
                 else:
                     print(colored("command '{}' not found on local-system".format(command), 'red'))
                     error_counter += 1
