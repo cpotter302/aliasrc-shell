@@ -36,7 +36,7 @@ for package in "${commands[@]}"; do
   fi
 
   if ! command -v "$apt_package" >/dev/null; then
-    echo -e "💀 You must install $apt_package on your system before setup can continue\n"
+    echo -e "💀 You must install ${red}$apt_package${reset} on your system before setup can continue\n"
     echo -e "To install automatically by the script enter 'yes'\n"
     read -r prompt
     if [[ $prompt =~ [yes|y] ]]; then
@@ -44,7 +44,7 @@ for package in "${commands[@]}"; do
         sudo apt install -y \
       "$package"
     else
-      echo "install packages manually by running:"
+      echo -e "install packages manually by running:\n"
       cat <<EOF
       sudo apt-get update &&
       sudo apt install -y \
@@ -65,7 +65,7 @@ cat <<EOF
 EOF
 sudo pip3 install -r "$root"/requirements.txt
 
-[ -d /usr/lib/alirc ] && echo "Sources already found on target location /usr/lib/alirc" && exit 1
+[ -d /usr/lib/alirc ] && echo -e "${red}ERROR${reset}: Sources already found on target location /usr/lib/alirc" && rm -rf "$root" && exit 1
 
 cat <<EOF
 ---------------------------------
