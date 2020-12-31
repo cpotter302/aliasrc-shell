@@ -68,7 +68,7 @@ def file_check(text_content):
             if alias_pattern.match(line):
                 sliced_line = slice_line(line.strip(), "'", 2)
                 command = get_command(sliced_line)
-                if is_command(command) or command in wildCardList:
+                if command in wildCardList:
                     error_counter += 0 if check_line(sliced_line, command, index) else 1
                 else:
                     print(colored("command '{}' not found on local-system".format(command), 'red'))
