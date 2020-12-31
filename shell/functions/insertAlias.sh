@@ -14,4 +14,3 @@ else
   echo "File named $ALIAS_RC_ROOT does not exist"
 fi
 
-#&& ! command -v "$1" &>/dev/null
