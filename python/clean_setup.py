@@ -70,12 +70,10 @@ def file_check(text_content):
                 command = get_command(sliced_line)
                 if is_command(command) or command in wildCardList:
                     error_counter += 0 if check_line(sliced_line, command, index) else 1
-                elif not is_command(command):
+                else:
                     error_counter += 0 if check_line(sliced_line, command, index) else 1
                     print(colored("command '{}' not found on local-system".format(command), 'red'))
                     print("Line: {} ->\t{}\n".format(index + 1, str(line)))
-                else:
-                    print(colored("command '{}' not found on local-system".format(command), 'red'))
                     error_counter += 1
         elif line.strip():
             print(colored("Removing line {}: {}  due to wrong pattern".format(index, line), 'red'))
