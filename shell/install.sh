@@ -7,8 +7,9 @@ red=$(tput setaf 1)
 green=$(tput setaf 2)
 reset=$(tput sgr0)
 empty_line=$(echo -e "\n")
+root=aliasrc-shell
 
-git clone https://github.com/cpotter302/aliasrc-shell.git
+git clone https://github.com/cpotter302/"$root".git
 
 echo "$empty_line"
 
@@ -21,7 +22,7 @@ bashrc_path="$HOME"/.bashrc
 
 cat <<EOF
 ---------------------------------
--- 1/3 🔎 ${green}checking dependencies"${reset} --
+-- 1/4 🔎 ${green}checking dependencies"${reset} --
 ---------------------------------
 EOF
 
@@ -59,33 +60,44 @@ done
 
 cat <<EOF
 ---------------------------------
--- 2/3  🔎 ${green}Installing Python packages"${reset} --
+-- 2/4  🔎 ${green}Installing Python packages"${reset} --
 ---------------------------------
 EOF
-sudo pip3 install -r aliasrc-shell/requirements.txt
+sudo pip3 install -r "$root"/requirements.txt
 
 [ -d /usr/lib/alirc ] && echo "Sources already found on target location /usr/lib/alirc" && exit 1
 
 cat <<EOF
 ---------------------------------
--- 3/3  🔎 ${green}Copying sources"${reset} --
+-- 3/4  🔎 ${green}Installing manual page"${reset} --
 ---------------------------------
 EOF
 sudo -s -- <<EOF
-  sed -i -e 's/\r$//' aliasrc-shell/shell/functions/*.sh &&
-  mkdir -p /usr/lib/alirc &&
-  mv -v "$PWD"/aliasrc-shell/shell/alias.sh /bin/alirc &&
-  mv "$PWD"/aliasrc-shell/* /usr/lib/alirc
-  chmod +x /bin/alirc
-  echo -e "\nAll done.\n"
+  cp -v $root/alirc.man /usr/share/man/man8/alirc.8 &&
+  gzip /usr/share/man/man8/alirc.8
+  echo -e "\nSuccessfully installed man pages."
 EOF
 
-rm -rf aliasrc-shell
+cat <<EOF
+---------------------------------
+-- 4/4  🔎 ${green}Copying sources"${reset} --
+---------------------------------
+EOF
+sudo -s -- <<EOF
+  sed -i -e 's/\r$//' "$root"/shell/functions/*.sh &&
+  mkdir -p /usr/lib/alirc &&
+  mv -v "$PWD"/"$root"/shell/alias.sh /bin/alirc &&
+  mv "$PWD"/"$root"/* /usr/lib/alirc
+  chmod +x /bin/alirc
+  echo -e "\nAll done."
+EOF
+
+rm -rf "$root"
 
 cat <<EOF
--> Succesfully installed aliasrc-shell
+-> Succesfully installed "$root"
 -> removed cloned sources...
-!! view the ${green}manual pages${reset} for further instructions !!
+!! view the ${green}manual pages${reset} ('man alirc') for further instructions !!
 $empty_line
 ----------------------------------------------
 -- RUN ${red}source ~/.bashrc${reset} to activate changes --
