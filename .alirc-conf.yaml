@@ -1,0 +1,5 @@
+alirc:
+  config:
+    sortType: group-based
+    wildCards: sudo,ls,echo
+    useStrict: true
