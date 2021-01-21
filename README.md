@@ -13,7 +13,7 @@ and deleting. No more nasty typing with several commands!
 
 ```bash
 curl https://raw.githubusercontent.com/cpotter302/aliasrc-shell/master/shell/install.sh | $SHELL
-``
+```
 
 #### From sources
 
