@@ -104,4 +104,4 @@ $empty_line
 ----------------------------------------------
 EOF
 
-#TODO: remove sources / envs script / create symlink to from /usr/bin/ to /bin | remove redundancy from multiple execution
+#TODO: remove redundancy from multiple execution
