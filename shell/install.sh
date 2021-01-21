@@ -25,7 +25,7 @@ cat <<EOF
 ---------------------------------
 EOF
 
-declare -a commands=("python3" "python3-pip")
+commands=("python3" "python3-pip")
 for package in "${commands[@]}"; do
 
   if [ "$package" == "python3-pip" ]; then
