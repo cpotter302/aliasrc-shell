@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#[[ "$EUID" -eq 0 ]]
-#test $? -eq 0 || echo "Run script with sudo rights" && exit 1
 
 red=$(tput setaf 1)
 green=$(tput setaf 2)
