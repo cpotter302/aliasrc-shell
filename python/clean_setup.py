@@ -1,12 +1,15 @@
 import re as pattern
 import sys
 from termcolor import colored
+from subprocess import check_output
 
 groupNames = []
 aliasList = []
 aliasCommands = []
 genLine = "#"
-wildCardList = ["source, sudo"]
+
+commands = str(check_output('compgen -c', shell=True, executable='/bin/bash'))
+wildCardList = commands[2:].split("\\n")[:-1]
 
 
 def get_command(string):
