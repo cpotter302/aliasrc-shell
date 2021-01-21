@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#[[ "$EUID" -eq 0 ]]
-#test $? -eq 0 || echo "Run script with sudo rights" && exit 1
 
 red=$(tput setaf 1)
 green=$(tput setaf 2)
@@ -112,4 +110,4 @@ $empty_line
 ----------------------------------------------
 EOF
 
-#TODO: remove sources / envs script / create symlink to from /usr/bin/ to /bin | remove redundancy from multiple execution
+#TODO: remove redundancy from multiple execution

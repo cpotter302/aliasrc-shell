@@ -1,13 +1,12 @@
 #!/bin/bash
-if [ -f $ALIAS_RC_ROOT ]; then
+if [ -f "$ALIAS_RC_ROOT" ]; then
     echo "Are you sure to delete the file? Type yes"
-    read prompt
+    read -r prompt
     if [[ $prompt =~ [yes|y] ]]; then
-        true > /home/carlo/.bash_aliasrc
-        cat /home/carlo/.bash_aliasrc
+        true > "$HOME".bash_aliases
     else 
         exit 1
     fi
 else 
-    echo "File /home/carlo/.bash_aliasrc does not exist"
+    echo "File /home/carlo/.bash_aliases does not exist"
 fi
