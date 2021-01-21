@@ -12,16 +12,16 @@ and deleting. No more nasty typing with several commands!
 #### via curl 
 
 ```bash
-curl https://raw.githubusercontent.com/cpotter302/aliasrc-shell/master/shell/install.sh | $SHELL
+curl https://raw.githubusercontent.com/cpotter302/aliasrc-shell/master/shell/install.sh | bash
 ```
 
 #### From sources
 
 ```bash
-curl https://raw.githubusercontent.com/cpotter302/aliasrc-shell/master/download-sources.sh | $SHELL
+curl https://raw.githubusercontent.com/cpotter302/aliasrc-shell/master/download-sources.sh | bash
 ```
 #### Uninstall
 
 ```bash
-curl https://raw.githubusercontent.com/cpotter302/aliasrc-shell/master/shell/uninstall.sh | $SHELL
+curl https://raw.githubusercontent.com/cpotter302/aliasrc-shell/master/shell/uninstall.sh | bash
 ```
