@@ -1,6 +1,6 @@
-.\" Manpage for alirc.
+.\" Manpage for ali.
 .\" Contact carlo.poetter@web.de to correct errors or typos.
-.TH man 8 "30.12.2020" "1.0" "alirc man page"
+.TH man 8 "30.12.2020" "1.0" "ali man page"
 .SH NAME
 alirc
 .SH SYNOPSIS
@@ -14,7 +14,7 @@ add alias:
 print command group:
         -p -g "GROUP_NAME"
 
-delete aliasrc file:
+delete .bash_aliases file:
         -d
 
 edit file with given editor:
