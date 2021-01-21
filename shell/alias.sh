@@ -49,28 +49,28 @@ fi
 
 #Check parameters
 if [ "$alias" ] && [ "$command" ]; then
-  . $bash_sources/insertAlias.sh "$alias" "$command" "$overwrite"
+  $bash_sources/insertAlias.sh "$alias" "$command" "$overwrite"
 
 elif [ "$verify" == true ]; then
   light_setup "verify"
 
 elif [ "$group" ] && [ "$print" == true ]; then
-  . $bash_sources/printCommandGroup.sh "$group"
+  $bash_sources/printCommandGroup.sh "$group"
 
 elif [ "$print" == true ]; then
-  . $bash_sources/printBashAliases.sh
+  $bash_sources/printBashAliases.sh
 
 elif [ "$delete" == true ] && [ "$alias" ]; then
-  . $bash_sources/deleteAlias.sh "$alias"
+  $bash_sources/deleteAlias.sh "$alias"
 
 elif [ "$delete" == true ] && [ "$group" ]; then
-  . $bash_sources/deleteGroup.sh "$group"
+  $bash_sources/deleteGroup.sh "$group"
 
 elif [ "$delete" == true ]; then
-  . $bash_sources/pruneAliasFile.sh
+  $bash_sources/pruneAliasFile.sh
 
 elif [ "$editor" ]; then
-  . $bash_sources/editAliases.sh "$editor"
+  $bash_sources/editAliases.sh "$editor"
 
 else
   helpFunction
