@@ -16,9 +16,6 @@ echo "$empty_line"
 alias_path=~/.bash_aliases
 bashrc_path="$HOME"/.bashrc
 
-([ -f $alias_path ] && grep -q "ALIAS_RC_ROOT" "$bashrc_path" &&
-  echo "export ALIAS_RC_ROOT=$alias_path" >>"$bashrc_path") ||
-  (touch $alias_path && echo "export ALIAS_RC_ROOT=$alias_path" >>"$bashrc_path")
 
 cat <<EOF
 ---------------------------------
@@ -66,6 +63,10 @@ EOF
 sudo pip3 install -r "$root"/requirements.txt
 
 [ -d /usr/lib/alirc ] && echo -e "${red}ERROR${reset}: Sources already found on target location /usr/lib/alirc" && rm -rf "$root" && exit 1
+
+([ -f $alias_path ] && grep -q "ALIAS_RC_ROOT" "$bashrc_path" &&
+  echo "export ALIAS_RC_ROOT=$alias_path" >>"$bashrc_path") ||
+  (touch $alias_path && echo "export ALIAS_RC_ROOT=$alias_path" >>"$bashrc_path")
 
 cat <<EOF
 ---------------------------------
