@@ -86,10 +86,10 @@ sudo -s -- <<EOF
   sed -i -e 's/\r$//' "$root"/shell/functions/*.sh &&
   mv "$PWD"/"$root"/.aliasrc.conf "$HOME"
   mkdir -p /usr/lib/ali &&
-  mv -v "$PWD"/"$root"/shell/alias.sh /bin/ali &&
+  mv -v "$PWD"/"$root"/shell/alias.sh /usr/bin/ali &&
   mv "$PWD"/"$root"/* /usr/lib/ali
-  chmod +x /bin/ali
-  ln -s /bin/ali /usr/local/bin/ali
+  chmod +x /usr/bin/ali
+  ln -s /usr/bin/ali /usr/local/bin/ali
   echo -e "\nAll done."
 EOF
 
