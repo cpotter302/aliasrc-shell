@@ -34,6 +34,8 @@ print specific alias:
 
 overwrite existing alias:
         -a -c -o
+edit config:
+        -s editor
 
 look for help
         -h
