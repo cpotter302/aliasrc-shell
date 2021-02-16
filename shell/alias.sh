@@ -18,7 +18,7 @@ while getopts ":a:c:g:pde:vos:" opt; do
   e) editor=$OPTARG ;; # edit .bash_aliasrc with given editor
   v) verify=true ;;
   o) overwrite=true ;;
-  s) should_sort=true ;;
+  s) should_sort="$OPTARG" ;;
   ?) helpFunction "$OPTARG" ;;
   esac
 done
