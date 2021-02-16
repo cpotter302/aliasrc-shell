@@ -9,7 +9,7 @@ aliasCommands = []
 genLine = "#"
 
 # commands = str(check_output('compgen -c', shell=True, executable='/bin/bash'))
-wildCardList = ["sudo", "cd", "file", "mv", "cp"]
+wildCardList = ["sudo", "cd", "file", "mv", "cp", "clear", "clear'",  "source", "kubectl'", "kubectl"]
 # commands[2:].split("\\n")[:-1]
 
 
