@@ -34,7 +34,7 @@ SORT_TYPE=$( (grep SORT_TYPE | cut -d'=' -f 2) <"$CONF_FILE")
 
 if [ -f "$CONF_FILE" ]; then
   if [[ "$SORT_TYPE" == "alph" ]]; then
-    sed -i sed -i '/^$/d' "$ALIAS_RC_ROOT"
+    sed -i '/^$/d' "$ALIAS_RC_ROOT"
     ( cat <"$ALIAS_RC_ROOT" | sort ) >tmp && mv tmp "$ALIAS_RC_ROOT"
   elif [[ "$SORT_TYPE" == "group-based" ]]; then
     light_setup "light-setup"
