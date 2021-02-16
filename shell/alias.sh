@@ -8,7 +8,7 @@ helpFunction() {
 bash_sources=/usr/lib/ali/shell/functions
 python_sources=/usr/lib/ali/python
 
-while getopts ":a:c:g:pde:vo" opt; do
+while getopts ":a:c:g:pde:vos:" opt; do
   case "$opt" in
   a) alias="$OPTARG" ;; #alias
   c) command="$OPTARG" ;; # command
@@ -18,6 +18,7 @@ while getopts ":a:c:g:pde:vo" opt; do
   e) editor=$OPTARG ;; # edit .bash_aliasrc with given editor
   v) verify=true ;;
   o) overwrite=true ;;
+  s) should_sort="$OPTARG" ;;
   ?) helpFunction "$OPTARG" ;;
   esac
 done
@@ -33,7 +34,7 @@ SORT_TYPE=$( (grep SORT_TYPE | cut -d'=' -f 2) <"$CONF_FILE")
 
 if [ -f "$CONF_FILE" ]; then
   if [[ "$SORT_TYPE" == "alph" ]]; then
-    sed -i "/\[*\]/d" "$ALIAS_RC_ROOT"
+    sed -i sed -i '/^$/d' "$ALIAS_RC_ROOT"
     ( cat <"$ALIAS_RC_ROOT" | sort ) >tmp && mv tmp "$ALIAS_RC_ROOT"
   elif [[ "$SORT_TYPE" == "group-based" ]]; then
     light_setup "light-setup"
@@ -48,6 +49,9 @@ fi
 #Check parameters
 if [ "$alias" ] && [ "$command" ]; then
   $bash_sources/insertAlias.sh "$alias" "$command" "$overwrite"
+
+elif [ "$should_sort" ]; then
+  $bash_sources/editConfig.sh "$should_sort" "$CONF_FILE"
 
 elif [ "$verify" == true ]; then
   light_setup "verify"

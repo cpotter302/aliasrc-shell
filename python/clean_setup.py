@@ -8,8 +8,9 @@ aliasList = []
 aliasCommands = []
 genLine = "#"
 
-commands = str(check_output('compgen -c', shell=True, executable='/bin/bash'))
-wildCardList = commands[2:].split("\\n")[:-1]
+# commands = str(check_output('compgen -c', shell=True, executable='/bin/bash'))
+wildCardList = ["sudo"]
+# commands[2:].split("\\n")[:-1]
 
 
 def get_command(string):
