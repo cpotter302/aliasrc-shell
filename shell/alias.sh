@@ -8,7 +8,7 @@ helpFunction() {
 bash_sources=/usr/lib/ali/shell/functions
 python_sources=/usr/lib/ali/python
 
-while getopts ":a:c:g:pdes:vo" opt; do
+while getopts ":a:c:g:pde:vos:" opt; do
   case "$opt" in
   a) alias="$OPTARG" ;; #alias
   c) command="$OPTARG" ;; # command
